@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initial load: check for saved theme preference from local storage
+    // Initial load: Set dark mode by default, then check for saved light mode preference
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        darkMode(); // Apply dark mode if preferred
+    if (savedTheme === 'light') {
+        lightMode(); // If user explicitly saved 'light', apply it
     } else {
-        lightMode(); // Default to light mode if no preference or 'light'
+        darkMode(); // Otherwise, default to dark mode
     }
 
     // Show the Home section by default when the page loads
