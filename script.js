@@ -76,12 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initial load: Set dark mode by default, then check for saved light mode preference
+    // Initial load: Check for saved theme preference, then system preference
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        lightMode(); // If user explicitly saved 'light', apply it
+    if (savedTheme) {
+        // If a theme is saved in local storage, use that
+        if (savedTheme === 'dark') {
+            darkMode();
+        } else {
+            lightMode();
+        }
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // If no theme is saved, check system preference
+        darkMode();
     } else {
-        darkMode(); // Otherwise, default to dark mode
+        // Default to light mode if no saved preference and system prefers light
+        lightMode();
     }
 
     // Show the Home section by default when the page loads
